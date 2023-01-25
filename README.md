@@ -1,6 +1,6 @@
-<h1 align='center'> MLOoops Study </h1>
+<h1 align='center'>🙊 MLOoops!!! 🙊</h1>
 
-<h3 align='center'> with BOAZ </h3>
+<h3 align='center'> study with BOAZ </h3>
 
 
 ## Introduction 
