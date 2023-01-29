@@ -1,4 +1,6 @@
 import time
+from argparse import ArgumentParser
+
 import psycopg2
 import pandas as pd
 from sklearn.datasets import load_iris
@@ -14,6 +16,22 @@ def get_data():
 	}
 	df = df.rename(columns=rename_rule)
 	return df
+
+def create_table(db_connect):
+	create_table_query = """
+	CREATE TABLE IF NOT EXISTS iris_data (
+		id SERIAL PRIMARY KEY,
+		timestamp timestamp,
+		sepal_length float8,
+		sepal_width float8,
+		petal_length float8,
+		petal_width float8,
+		target int
+	);"""
+	print(create_table_query)
+	with db_connect.cursor() as cur:
+		cur.execute(create_table_query)
+		db_connect.commit()
 
 def insert_data(db_connect, data):
 	insert_row_query=f"""
@@ -35,16 +53,21 @@ def insert_data(db_connect, data):
 def generate_data(db_connect, df):
 	for i in range(10):
 		insert_data(db_connect, df.sample(1).squeeze())
-		time.sleep
+		time.sleep(1)
 	
 
 if __name__ == "__main__":
+	parser = ArgumentParser()
+	parser.add_argument("--db-host", dest="db_host", type=str, default="localhost")
+	args = parser.parse_args()
+
 	db_connect = psycopg2.connect(
-		user="kyuyeon",
+		user="postgres",
 		password="0429",
-		host="localhost",
+		host=args.db_host,
 		port=5432,
-		database="kyuyeon_db",
+		database="postgres",
 	)
+	create_table(db_connect)
 	df = get_data()
 	generate_data(db_connect, df)
