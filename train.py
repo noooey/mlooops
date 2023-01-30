@@ -1,5 +1,6 @@
 import joblib
-from sklearn.datasets import load_breast_cancer
+import pandas as pd
+import psycopg2
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -7,7 +8,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
 
 # get data
-X, y = load_breast_cancer(return_X_y=True, as_frame=True)
+db_connect = psycopg2.connect(host="localhost", database="postgres", user="postgres", password="0429")
+df = pd.read_sql("SELECT * FROM wisconsin_data ORDER BY id DESC LIMIT 100", db_connect)
+X = df.drop(["id", "target"], axis="columns")
+y = df["target"]
 X_train, X_valid, y_train, y_valid = train_test_split(X, y, train_size=0.8, random_state=2000)
 
 # model development and train
@@ -25,3 +29,6 @@ print("Valid Accuracy :", valid_acc)
 
 # save model
 joblib.dump(model_pipeline, "model_pipeline.joblib")
+
+# save data
+df.to_csv("data.csv", index=False)
