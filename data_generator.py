@@ -45,9 +45,8 @@ def get_data():
 
 def create_table(db_connect):
 	create_table_query = """
-	CREATE TABLE IF NOT EXISTS iris_data (
+	CREATE TABLE IF NOT EXISTS wisconsin_data (
 		id SERIAL PRIMARY KEY,
-		timestamp timestamp,
 		mean_radius float8,
 		mean_texture float8,
 		mean_perimeter float8,
@@ -88,41 +87,39 @@ def create_table(db_connect):
 def insert_data(db_connect, data):
 	insert_row_query=f"""
 	INSERT INTO wisconsin_data (
-		timestamp
   		mean_radius,
-                mean_texture,
-                mean_perimeter,
-                mean_area,
-                mean_smoothness,
-                mean_compactness,
-                mean_concavity,
-                mean_concave_points,
-                mean_symmetry,
-                mean_fractal_dimension,
-                radius_error,
-                texture_error,
-                perimeter_error,
-                area_error,
-                smoothness_error,
-                compactness_error,
-                concavity_error,
-                concave_points_error,
-                symmetry_error,
-                fractal_dimension_error,
-                worst_radius,
-                worst_texture,
-                worst_perimeter,
-                worst_area,
-                worst_smoothness,
-                worst_compactness,
-                worst_concavity,
-                worst_concave_points,
-                worst_symmetry,
-                worst_fractal_dimension,
-                target
+        mean_texture,
+		mean_perimeter,
+		mean_area,
+		mean_smoothness,
+		mean_compactness,
+		mean_concavity,
+		mean_concave_points,
+		mean_symmetry,
+		mean_fractal_dimension,
+		radius_error,
+		texture_error,
+		perimeter_error,
+		area_error,
+		smoothness_error,
+		compactness_error,
+		concavity_error,
+		concave_points_error,
+		symmetry_error,
+		fractal_dimension_error,
+		worst_radius,
+		worst_texture,
+		worst_perimeter,
+		worst_area,
+		worst_smoothness,
+		worst_compactness,
+		worst_concavity,
+		worst_concave_points,
+		worst_symmetry,
+		worst_fractal_dimension,
+		target
 		)
 		VALUES (
-			NOW(),
 			{data.mean_radius},
 			{data.mean_texture},
  			{data.mean_perimeter},
@@ -162,7 +159,7 @@ def insert_data(db_connect, data):
 
 def generate_data(db_connect, df):
 	for i in range(len(df)):
-		insert_data(db_connect, df.sample(i).squeeze())
+		insert_data(db_connect, df.loc[i].squeeze())
 	
 
 if __name__ == "__main__":
@@ -170,7 +167,7 @@ if __name__ == "__main__":
 	parser.add_argument("--db-host", dest="db_host", type=str, default="localhost")
 	args = parser.parse_args()
 
-	db_connect = psycopg2.connect(
+	db_connect = psycopg2.connect(                    
 		user="postgres",
 		password="0429",
 		host=args.db_host,

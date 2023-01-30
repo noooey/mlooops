@@ -12,8 +12,8 @@ scikit-learn **Wisconsin breast cancer dataset**
 
 ## Log
 
-|Date|Content                                                                                              |
-|----|-----------------------------------------------------------------------------------------------------|
+|Date|Content                                                                                         |
+|----|------------------------------------------------------------------------------------------------|
 |1/23|DB server creation on Docker server, Docker 기본 명령어, Docker 포트 포워딩                          |
-|1/24|Postgresql 기초, Dockerfile 작성, Docker compose issue                                               |
-|1/29|Docker compose issue 해결, Wisconsin dataset 로드                                                    |
+|1/24|Postgresql 기초, Dockerfile 작성, Docker compose issue                                            |
+|1/29|Docker compose issue 해결, Wisconsin dataset 로드                                                 |
