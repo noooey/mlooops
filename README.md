@@ -19,3 +19,4 @@ scikit-learn **Wisconsin breast cancer dataset**
 |1/29|Docker compose issue 해결, Wisconsin dataset 로드                                                 |
 |1/30|scaler-SVC 파이프라인 모델 train code, validate code, DB연결                                        |
 |2/5|SVC 모델 train, validate,  Makefile 추가, MLflow setup                                             |
+|2/6|모델 save to registry, 모델 loat to registry                                                      |
