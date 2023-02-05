@@ -9,5 +9,5 @@ server-clean:
 	sudo docker compoes down -v
 	sudo docker rmi -f mlooops-data-generator postgres:14.0
 
-db-connnection:
+db-connection:
 	PGPASSWORD=0429 psql -h localhost -p 5432 -U postgres -d postgres
