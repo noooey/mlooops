@@ -5,11 +5,11 @@ services:
     image: postgres:14.0
     container_name: mlflow-backend-store
     environment:
-      POSTGRES_USER: mlflow
-      POSTGRES_PASSWORD: '0429'
-      POSTGRES_DB: mlflowdatabase
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+      POSTGRES_DB: ${POSTGRES_DB}
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-U", "mlflow", "-d", "mlflowdatabase"]
+      test: ["CMD", "pg_isready", "-q", "-U", "mlflow", "-d", "${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -21,8 +21,8 @@ services:
       - 9000:9000 # minio api port
       - 9001:9001 # minio console port
     environment:
-      MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: 'qwer1234'
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: '${MINIO_ROOT_PASSWORD}'
     command: server /data/minio --console-address :9001
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
@@ -43,16 +43,16 @@ services:
     ports:
       - 5001:5000
     environment:
-      AWS_ACCESS_KEY_ID: minio
-      AWS_SECRET_ACCESS_KEY: 'qwer1234'
-      MLFLOW_S3_ENDPOINT_URL: http://mlflow-artifact-store:9000
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: '${AWS_SECRET_ACCESS_KEY}'
+      MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
     command:
       - /bin/sh 
       - -c 
       - |
-        mc config host add mlflowminio http://mlflow-artifact-store:9000 minio qwer1234 &&
+        mc config host add mlflowminio ${MLFLOW_S3_ENDPOINT_URL} ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} &&
         mc mb --ignore-existing mlflowminio/mlflow
         mlflow server \
-        --backend-store-uri postgresql://mlflow:qwer1234@mlflow-backend-store/mlflowdatabase \
+        --backend-store-uri postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@mlflow-backend-store/${POSTGRES_DB} \
         --default-artifact-root s3://mlflow/ \
         --host 0.0.0.0
