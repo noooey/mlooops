@@ -3,7 +3,7 @@ init:
 	pip install pandas scikit-learn joblib
 
 dependency:
-	make -C ../database/server
+	make -C ../database/ server
 
-dependency:
-	make -C ../database/server-clean
+dependency-clean:
+	make -C ../database/ server-clean
