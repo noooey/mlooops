@@ -32,3 +32,9 @@ joblib.dump(model_pipeline, "model_pipeline.joblib")
 
 # save data
 df.to_csv("data.csv", index=False)
+
+
+"""
+Train Accuracy : 0.975
+Valid Accuracy : 0.95
+"""
