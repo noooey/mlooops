@@ -1,3 +1,4 @@
 data.csv
 model_pipeline.joblib
 .env
+__pycache__
