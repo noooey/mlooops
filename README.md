@@ -21,3 +21,4 @@ scikit-learn **Wisconsin breast cancer dataset**
 |2/5|SVC 모델 train, validate,  Makefile 추가, MLflow setup                                             |
 |2/6|모델 save to registry, 모델 loat to registry                                                      |
 |2/13|FastAPI server 생성 및 CRUD 테스트                                                                 |
+|2/20|모델 추론 FastAPI server 생성 및 Docker에서 build                                                    |
