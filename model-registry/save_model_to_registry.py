@@ -47,14 +47,13 @@ parser = ArgumentParser()
 parser.add_argument("--model-name", dest="model_name", type=str, default="sk_model")
 args = parser.parse_args()
 
-# 'experiment에 new-exp 폴더 생성하여 정보 저장
 mlflow.set_experiment("new-exp")
 
-# 잘못 된 인풋 들어오지 않도록 예시 샘플들 넣어줌
+# create input form for keeping out invalid input
 signature = mlflow.models.signature.infer_signature(model_input=X_train, model_output=train_pred)
 input_sample = X_train.iloc[:10]
 
-# mlflow 실행
+# run mlflow
 with mlflow.start_run():
     mlflow.log_metrics({"train_acc": train_acc, "valid_acc": valid_acc})
     mlflow.sklearn.log_model(
