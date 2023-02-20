@@ -1,0 +1,39 @@
+artifact_path: sk_model
+flavors:
+  python_function:
+    env: conda.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.8.10
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.2.1
+mlflow_version: 1.30.0
+model_uuid: 29387b8038fb44018a56871d8e74e04a
+run_id: 4d9ded25364d46ccba34c5b7ae1d8ca6
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  type: dataframe
+signature:
+  inputs: '[{"name": "mean_radius", "type": "double"}, {"name": "mean_texture", "type":
+    "double"}, {"name": "mean_perimeter", "type": "double"}, {"name": "mean_area",
+    "type": "double"}, {"name": "mean_smoothness", "type": "double"}, {"name": "mean_compactness",
+    "type": "double"}, {"name": "mean_concavity", "type": "double"}, {"name": "mean_concave_points",
+    "type": "double"}, {"name": "mean_symmetry", "type": "double"}, {"name": "mean_fractal_dimension",
+    "type": "double"}, {"name": "radius_error", "type": "double"}, {"name": "texture_error",
+    "type": "double"}, {"name": "perimeter_error", "type": "double"}, {"name": "area_error",
+    "type": "double"}, {"name": "smoothness_error", "type": "double"}, {"name": "compactness_error",
+    "type": "double"}, {"name": "concavity_error", "type": "double"}, {"name": "concave_points_error",
+    "type": "double"}, {"name": "symmetry_error", "type": "double"}, {"name": "fractal_dimension_error",
+    "type": "double"}, {"name": "worst_radius", "type": "double"}, {"name": "worst_texture",
+    "type": "double"}, {"name": "worst_perimeter", "type": "double"}, {"name": "worst_area",
+    "type": "double"}, {"name": "worst_smoothness", "type": "double"}, {"name": "worst_compactness",
+    "type": "double"}, {"name": "worst_concavity", "type": "double"}, {"name": "worst_concave_points",
+    "type": "double"}, {"name": "worst_symmetry", "type": "double"}, {"name": "worst_fractal_dimension",
+    "type": "double"}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+utc_time_created: '2023-02-20 12:23:26.001009'
