@@ -10,7 +10,7 @@ server:
 
 server-clean:
 	sudo docker compose down -v
-	sudo docker rmi -f api-with-model
+	sudo docker rmi -f api-serving-api-with-model
 
 dependency:
 	make -C ../database/ server
