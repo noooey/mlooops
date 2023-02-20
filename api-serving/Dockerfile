@@ -9,4 +9,4 @@ COPY schemas.py schemas.py
 COPY app.py app.py
 COPY sk_model/ sk_model/
 
-CMD ["uvicorn", "crud_pydantic:app", "--host", "0.0.0.0", "--reload"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--reload"]
