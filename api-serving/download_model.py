@@ -10,7 +10,7 @@ os.environ["AWS_ACCESS_KEY_ID"] = "minio"
 os.environ["AWS_SECRET_ACCESS_KEY"] = "qwer1234"
 
 def download_model(args):
-    # Download model artifacts
+    # Download model
     mlflow.artifacts.download_artifacts(artifact_uri=f"runs:/{args.run_id}/{args.model_name}", dst_path=".")
 
 
