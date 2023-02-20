@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  api-with-model:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-with-model
+    ports:
+      - 8000:8000
+    healthcheck:
+      test:
+        - curl -X POST http://localhost:8000/predict
+        - -H
+        - "Content-Type: application/json"
+        - -d
+        - '{
+              "mean_radius": 1,
+              "mean_texture": 1,
+              "mean_perimeter": 0.5,
+              "mean_area": 0.5,
+              "mean_smoothness": 0.3,
+              "mean_compactness": 0.4,
+              "mean_concavity": 0.5,
+              "mean_concave_points": 1,
+              "mean_symmetry": 0.4,
+              "mean_fractal_dimension": 0.2,
+              "radius_error": 0.6,
+              "texture_error": 0.1,
+              "perimeter_error": 0.05,
+              "area_error": 0.4,
+              "smoothness_error": 0.2,
+              "compactness_error": 0.1,
+              "concavity_error": 0.15,
+              "concave_points_error": 0.01,
+              "symmetry_error": 0.2,
+              "fractal_dimension_error": 0.03,
+              "worst_radius": 1,
+              "worst_texture": 2,
+              "worst_perimeter": 1,
+              "worst_area": 3,
+              "worst_smoothness": 1,
+              "worst_compactness": 2,
+              "worst_concavity": 2,
+              "worst_concave_points": 1,
+              "worst_symmetry": 3,
+              "worst_fractal_dimension": 1
+            }'
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  default:
+    name: mlops-network
+    external: true
